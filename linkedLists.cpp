@@ -1,7 +1,9 @@
 /*
- * Lab 3 - Linked Lists
+ * Lab 3 - Linked Lists - C++ and Data Structures with Andrew Cencini (andrewcencini@bennington.edu)
+ *
  * Sky Leilani (skyleilani@bennington.edu)
  *
+ * 3/22/2019
  */
 
 #include <iostream>
