@@ -10,9 +10,10 @@ using namespace std;
 
 
 /*
- * struct node: allows us to create instances of node object with which we will create a linked list
+ * Struct: node - allows us to create instances of node object with which we will create a linked list
  *
- * constructor(?) params: int v is the value and node *n is the pointer to the neighboring node
+ * constructor(?) params: int v - the value ;
+ *                node *n - the pointer to the neighboring node
  *
  */
 
@@ -39,11 +40,11 @@ node* findByValue(node* , int);
 
 
 /*
- * traverse - Task 0: traverse through linked list from node 0 to node with NULL neighbor
+ * Function: traverse - Task 0: traverse through linked list from node 0 to node with NULL neighbor
  *
- * start: pointer to the location of the starter node
+ * Param: start- pointer to the location of the starter node
  *
- * no return
+ * Returns: no return
  */
 void traverse(node *start) {
 
@@ -55,20 +56,23 @@ void traverse(node *start) {
     }
 }
 
-/*
- * addToEnd - Task 1: add a neew node to the end of an existing linked list
- *
- * startingPoint - a pointer to the start node's location, newNode - a pointer to a different node that will be added to linked list
- *
- * no return
- */
 
-void addToEnd(node *startingPoint, node *newNode) {
+/*
+ * Function: addToEnd - Task 1: add a neew node to the end of an existing linked list
+ *
+ * Params: startingPoint - a pointer to the start node's location,
+ *         newNode - a pointer to a different node that will be added to linked list
+ *
+ * Returns: no return
+ */
+void addToEnd( node *startingPoint, node *newNode ) {
 
     node* current = startingPoint;
 
-    while (current -> link != NULL) {
+    while ( current -> link != NULL ) {
+
         current = current -> link;
+
     }
 
     current -> link = newNode;
@@ -76,29 +80,28 @@ void addToEnd(node *startingPoint, node *newNode) {
 
 
 /*
- * addToBeginning - Task 2 : add a new node to the beginning of an already existing linked list
+ * Function: addToBeginning - Task 2 : add a new node to the beginning of an already existing linked list
  *
- * startingPoint - starting node of list, newNode - new node to add to linked list
+ * Params: startingPoint - starting node of list,
+ *         newNode - new node to add to linked list
  *
- * no return
+ * Returns: no return
  */
-
-void addToBeginning( node *startingPoint, node *newNode) {
+void addToBeginning( node *startingPoint, node *newNode ) {
 
         newNode->link = startingPoint;
-
 }
 
 
 /*
- * addAtIndex - Task 3 : add a new node at given (in param) index in linked list
+ * Function: addAtIndex - Task 3 : add a new node at given (in param) index in linked list
  *
- * startingPoint - pointer to  start node of linked list, newNode - pointer to newNode to add, index_val - place in list to add
+ * Params: startingPoint - pointer to  start node of linked list,
+ *         newNode - pointer to newNode to add, index_val - place in list to add
  *
- * no return
+ * Returns: no return
  */
-
-int addAtIndex( node *startingPoint, node *newNode, int index_val) {
+int addAtIndex( node *startingPoint, node *newNode, int index_val ) {
 
     int x = 0;
 
@@ -109,23 +112,22 @@ int addAtIndex( node *startingPoint, node *newNode, int index_val) {
 
     }
 
-
     newNode -> link = startingPoint -> link;
     startingPoint -> link = newNode;
 
     return startingPoint -> value;
-
 }
 
-/*
- * removeByValue - task 4 : remove a node by specified value
- *
- * startingPoint: start node, rem_val - index of node you want to remove
- *
- * return: nodes_removed - number of nodes removed
- */
 
-int removeByValue(node* startingPoint, int val){
+/*
+ * Function: removeByValue - task 4 : remove a node by specified value
+ *
+ * Params: startingPoint: start node of linked list,
+ *         rem_val - index of node you want to remove
+ *
+ * Returns: nodes_removed - number of nodes removed
+ */
+int removeByValue( node* startingPoint, int val ){
 
     int nodes_removed = 0;
 
@@ -137,71 +139,86 @@ int removeByValue(node* startingPoint, int val){
         if( curr -> value == val ){
 
             prev -> link = curr -> link; // c->l : StartingPoint -> link -> link
-            delete(prev->link);
+            delete( prev -> link );
 
             nodes_removed++;
-
         }
 
         prev = curr;
         curr = curr -> link;
-
     }
 
-    cout << nodes_removed << " nodes removed" << endl;
-
+    cout << nodes_removed << " nodes removed." << endl;
     return nodes_removed;
 }
 
 
-node* removeAtStart(node* startingPoint){
+/*
+ * Function: removeAtStart - removes node from the beginning and creates a new node as start node
+ *
+ * Params: startingPoint - start node of linked list
+ *
+ * Returns: startingPoint - the new starting point of the linked list or NULL if starting point is null (not a linked list
+ */
+node* removeAtStart( node* startingPoint ){
 
-    if (startingPoint != NULL){
+    if( startingPoint != NULL ){
 
-         cout << "deleting node " << startingPoint-> value << " at "<<  startingPoint  << endl;
+         cout << "Deleting node " << startingPoint-> value << " at "<<  startingPoint  << endl;
 
          startingPoint = startingPoint -> link;
 
          return startingPoint;
-
-
     }
 
+    cout << "This list is empty... " << endl;
     return NULL;
 
 }
 
-
-void removeAtEnd(node* startingPoint) {
+/*
+ * Function: removeAtEnd - removes a node from the end of an existing linked list
+ *
+ * Params: startingPoint - start node of linked list
+ *
+ * Returns: no return
+ */
+void removeAtEnd( node* startingPoint ) {
 
     node* curr = startingPoint;
     node* prev = startingPoint;
 
-    while (curr->link != NULL) {
+    while ( curr->link != NULL ) {
 
         prev = curr;
         curr = curr->link;
 
-
      }
 
-    cout << curr -> value   << " deleted" << endl;  //  WHY IS THIS 0..?
-
+    cout << curr -> value   << " deleted" << endl;
     prev -> link = NULL;
-
-
 
     delete(prev->link);
 }
 
 
+/*
+ * Function: findByValue - finds a node of specified value
+ *
+ * Params: startingPoint - start node of linked list,
+ *         int value - value of node you wish you find
+ *
+ * Returns: location of node with the value specified
+ */
 node* findByValue(node* startingPoint, int value) {
 
-    while( startingPoint -> link != NULL && startingPoint -> value != value) {
+    while( startingPoint -> link != NULL && startingPoint -> value != value ) {
+        
         startingPoint = startingPoint -> link;
+        
     }
 
-    if (startingPoint -> value == value) {
+    if (startingPoint -> value == value ) {
 
         cout << "node " << startingPoint -> value << " found at " << startingPoint << endl;
         return startingPoint;
@@ -210,6 +227,7 @@ node* findByValue(node* startingPoint, int value) {
     cout << "NODE NOT FOUND IN LIST " << endl;
     return NULL;
 }
+
 
 int main() {
 
@@ -251,8 +269,6 @@ int main() {
     cout <<"\n removing from start of list.. \n" << endl;
     start_l = removeAtStart(start_l);
     traverse(start_l);
-
-
 
     cout <<"\n removing from end of list... \n" << endl;
     removeAtEnd(start_l);
